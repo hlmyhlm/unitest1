@@ -11,11 +11,15 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class SiswaTest extends TestCase
 {
     use RefreshDatabase;
-    /**
-     * A basic feature test example.
-     */
+
     public function test_bisa_tampil_data(): void
     {
+        $user = User::create([
+            'name' => 'John Doe',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('12345678'),
+        ]);
+        $this->actingAs($user);
         // Membuat data siswa
         $siswa1 = Siswa::create(['nama' => 'John Doe', 'alamat' => 'Jl. Merdeka']);
         $siswa2 = Siswa::create(['nama' => 'Jane Smith', 'alamat' => 'Jl. Pahlawan']);
@@ -34,6 +38,12 @@ class SiswaTest extends TestCase
 
     public function test_bisa_tampil_form()
     {
+        $user = User::create([
+            'name' => 'John Doe',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('12345678'),
+        ]);
+        $this->actingAs($user);
         $response = $this->get('/siswa/create');
         $response->assertStatus(200);
         $response->assertSee('name="nama"', false);
@@ -42,6 +52,12 @@ class SiswaTest extends TestCase
 
     public function test_validasi_semua_data_wajib_diisi()
     {
+        $user = User::create([
+            'name' => 'John Doe',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('12345678'),
+        ]);
+        $this->actingAs($user);
         $response = $this->post('/siswa');
         $response->assertStatus(302);
         $response->assertSessionHasErrors(['nama', 'alamat']);
@@ -49,6 +65,12 @@ class SiswaTest extends TestCase
 
     public function test_bisa_menyimpan_data_siswa()
     {
+        $user = User::create([
+            'name' => 'John Doe',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('12345678'),
+        ]);
+        $this->actingAs($user);
         $siswaData = [
             'nama' => 'John Doe',
             'alamat' => 'Jl. Merdeka',
@@ -60,6 +82,12 @@ class SiswaTest extends TestCase
 
     public function test_bisa_menampilkan_form_edit()
     {
+        $user = User::create([
+            'name' => 'John Doe',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('12345678'),
+        ]);
+        $this->actingAs($user);
         // Membuat data siswa
         $siswa = Siswa::create([
             'nama' => 'John Doe',
@@ -75,6 +103,12 @@ class SiswaTest extends TestCase
 
     public function test_bisa_update()
     {
+        $user = User::create([
+            'name' => 'John Doe',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('12345678'),
+        ]);
+        $this->actingAs($user);
         // Membuat data siswa
         $siswa = Siswa::create([
             'nama' => 'John Doe',
@@ -97,6 +131,12 @@ class SiswaTest extends TestCase
 
     public function test_bisa_hapus_data()
     {
+        $user = User::create([
+            'name' => 'John Doe',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('12345678'),
+        ]);
+        $this->actingAs($user);
         // Membuat data siswa
         $siswa = Siswa::create([
             'nama' => 'John Doe',
