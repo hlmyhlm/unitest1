@@ -129,7 +129,7 @@ class SiswaTest extends TestCase
         $this->assertDatabaseHas('siswas', $updatedData);
     }
 
-    public function test_bisa_hapus_data()
+    public function test_boleh_hapus_data()
     {
         $user = User::create([
             'name' => 'John Doe',
