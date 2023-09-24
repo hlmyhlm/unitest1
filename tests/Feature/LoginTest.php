@@ -22,7 +22,7 @@ class LoginTest extends TestCase
         $response->assertSee('type="submit"', false);
     }
 
-    public function test_berhasil_login(): void
+    public function test_berjaya_login(): void
     {
         User::create([
             'name' => 'test',

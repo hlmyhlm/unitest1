@@ -23,7 +23,7 @@ class RegisterTest extends TestCase
         $response->assertSee('type="submit"', false);
     }
 
-    public function test_proses_register_berhasil(): void
+    public function test_proses_register_berjaya(): void
     {
         $data = [
             'name' => 'test1',
@@ -47,7 +47,7 @@ class RegisterTest extends TestCase
         ];
         //buat user
         \App\Models\User::create($data);
-        //coba daftar dengan user yang sama
+        //cuba daftar dengan user yang sama
         $response = $this->post('/register', $data);
         $response->assertSessionHasErrors(['email']);
     }

@@ -12,7 +12,7 @@ class AuthUserTest extends TestCase
     /**
      * A basic feature test example.
      */
-    public function test_auth_user_bisa_melihat_siswa(): void
+    public function test_auth_user_tidak_boleh_view_page_siswa(): void
     {
         $response = $this->get('/siswa');
         $response->assertStatus(302);

@@ -12,7 +12,7 @@ class SiswaTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_bisa_tampil_data(): void
+    public function test_boleh_display_data(): void
     {
         $user = User::create([
             'name' => 'John Doe',
@@ -20,14 +20,14 @@ class SiswaTest extends TestCase
             'password' => bcrypt('12345678'),
         ]);
         $this->actingAs($user);
-        // Membuat data siswa
-        $siswa1 = Siswa::create(['nama' => 'John Doe', 'alamat' => 'Jl. Merdeka']);
-        $siswa2 = Siswa::create(['nama' => 'Jane Smith', 'alamat' => 'Jl. Pahlawan']);
+        // User tambah data siswa
+        $siswa1 = Siswa::create(['nama' => 'John Doe', 'alamat' => 'Jalan TAR']);
+        $siswa2 = Siswa::create(['nama' => 'Jane Smith', 'alamat' => 'Putrajaya']);
 
-        // Mengirim permintaan GET ke route siswa
+        // Hantar permintaan GET ke route siswa
         $response = $this->get('/siswa');
 
-        // Memastikan respons kode status 200 (OK)
+        // Memastikan respons kod status 200 (OK)
         $response->assertStatus(200);
         // Memastikan respons berisi nama dan alamat siswa
         $response->assertSee($siswa1->nama);
@@ -36,7 +36,7 @@ class SiswaTest extends TestCase
         $response->assertSee($siswa2->alamat);
     }
 
-    public function test_bisa_tampil_form()
+    public function test_display_form()
     {
         $user = User::create([
             'name' => 'John Doe',
@@ -63,7 +63,7 @@ class SiswaTest extends TestCase
         $response->assertSessionHasErrors(['nama', 'alamat']);
     }
 
-    public function test_bisa_menyimpan_data_siswa()
+    public function test_boleh_simpan_data_siswa()
     {
         $user = User::create([
             'name' => 'John Doe',
@@ -73,14 +73,14 @@ class SiswaTest extends TestCase
         $this->actingAs($user);
         $siswaData = [
             'nama' => 'John Doe',
-            'alamat' => 'Jl. Merdeka',
+            'alamat' => 'Putrajaya',
         ];
         $response = $this->post('/siswa', $siswaData);
         $response->assertSessionHasNoErrors();
         $this->assertDatabaseHas('siswas', $siswaData);
     }
 
-    public function test_bisa_menampilkan_form_edit()
+    public function test_boleh_display_form_edit()
     {
         $user = User::create([
             'name' => 'John Doe',
@@ -91,17 +91,17 @@ class SiswaTest extends TestCase
         // Membuat data siswa
         $siswa = Siswa::create([
             'nama' => 'John Doe',
-            'alamat' => 'Jl. Merdeka',
+            'alamat' => 'Putrajaya',
         ]);
 
-        // Mengirim permintaan GET ke halaman edit siswa
+        // Mengirim permintaan GET ke page edit siswa
         $response = $this->get('/siswa/' . $siswa->id . '/edit');
         $response->assertStatus(200);
         $response->assertSee($siswa->nama, false);
         $response->assertSee($siswa->alamat, false);
     }
 
-    public function test_bisa_update()
+    public function test_boleh_update()
     {
         $user = User::create([
             'name' => 'John Doe',
@@ -112,12 +112,12 @@ class SiswaTest extends TestCase
         // Membuat data siswa
         $siswa = Siswa::create([
             'nama' => 'John Doe',
-            'alamat' => 'Jl. Merdeka',
+            'alamat' => 'Putrajaya',
         ]);
         // Data siswa yang akan diupdate
         $updatedData = [
             'nama' => 'John Doe Updated',
-            'alamat' => 'Jl. Merdeka Updated',
+            'alamat' => 'Putrajaya Updated',
         ];
 
         // Mengirim permintaan PUT untuk mengupdate data siswa
@@ -140,7 +140,7 @@ class SiswaTest extends TestCase
         // Membuat data siswa
         $siswa = Siswa::create([
             'nama' => 'John Doe',
-            'alamat' => 'Jl. Merdeka',
+            'alamat' => 'Putrajaya',
         ]);
 
         // Mengirim permintaan DELETE untuk menghapus data siswa
